@@ -9,6 +9,7 @@ use App\Models\BarberAvailability;
 use App\Models\BarberPhotos;
 use App\Models\BarberServices;
 use App\Models\BarberTestimonials;
+use Illuminate\Http\Request;
 
 class BarberController extends Controller
 {
@@ -93,12 +94,31 @@ class BarberController extends Controller
                     $newBarberAvailability->hours = implode(',', $hours);
                     $newBarberAvailability->save();
                 }
-
-                return $array;
             }
         } catch (\Throwable $th) {
             $array = ['error' => $th->getMessage()];
             return $array;
+        }
+    }
+
+    public function list(Request $request)
+    {
+        try {
+            $array = ['error' => ''];
+
+            $barbers = Barber::all();
+
+            foreach ($barbers as $bkey => $bvalue) {
+                $barbers[$bkey]['avatar'] = url('media/avatars/' . $barbers[$bkey]['avatar']);
+            }
+
+            $array['data'] = $barbers;
+            $array['loc'] = 'São Paulo';
+            $array['quantidade'] = $barbers->count();
+
+            return $array;
+        } catch (\Throwable $th) {
+            throw $th;
         }
     }
 }
