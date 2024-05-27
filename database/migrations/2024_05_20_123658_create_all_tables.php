@@ -59,7 +59,7 @@ return new class extends Migration
         Schema::create('barber_services', function (Blueprint $table) {
             $table->id();
             $table->integer('id_barber');
-            $table->float('name');
+            $table->string('name');
             $table->float('price');
         });
 
@@ -71,7 +71,7 @@ return new class extends Migration
             $table->string('body');
         });
 
-        Schema::create('barber_availability', function (Blueprint $table) {
+        Schema::create('barber_availabilities', function (Blueprint $table) {
             $table->id();
             $table->integer('id_barber');
             $table->integer('weekday');

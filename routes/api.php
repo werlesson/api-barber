@@ -3,11 +3,14 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BarberController;
 use App\Http\Controllers\UserController;
+use App\Models\Barber;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/401', [AuthController::class, 'unauthorized'])->name('login');
 Route::post('/401', [AuthController::class, 'unauthorized'])->name('login');
+
+Route::get('/random', [BarberController::class, 'createRandom']);
 
 Route::post('/auth/login', [AuthController::class, 'login']);
 Route::post('/auth/logout', [AuthController::class, 'logout']);
